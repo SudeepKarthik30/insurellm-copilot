@@ -1,0 +1,13 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+.ipynb_checkpoints/
+.DS_Store
+
+# The vector store is auto-built from knowledge-base/ on first run
+# (see implementation/answer.py: _ensure_vector_db). Don't commit the
+# built index — commit the source markdown in knowledge-base/ instead.
+vector_db/

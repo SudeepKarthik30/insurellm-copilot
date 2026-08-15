@@ -1,0 +1,16 @@
+gradio>=5.47.2,<6.0
+pandas>=2.3.3
+langchain>=0.3.27
+langchain-core>=0.3.76
+langchain-openai>=0.3.33
+langchain-chroma>=0.2.6
+langchain-huggingface>=1.0.0
+langchain-text-splitters>=0.3.11
+langchain-community>=0.3.30
+chromadb>=1.1.0
+sentence-transformers>=5.1.1
+torch>=2.8.0
+openai>=1.109.1
+python-dotenv>=1.1.1
+tenacity>=9.0.0
+pydantic>=2.9.0
