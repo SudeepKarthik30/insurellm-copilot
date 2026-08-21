@@ -6,7 +6,7 @@ app_file: app.py
 pinned: false
 ---
 
-# Insurellm RAG Assistant
+# Insurellm Assistant
 
 A retrieval-augmented generation (RAG) system that answers questions over a
 company knowledge base, with a companion evaluation dashboard for measuring
