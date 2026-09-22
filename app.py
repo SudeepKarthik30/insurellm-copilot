@@ -1,3 +1,4 @@
+import os
 import gradio as gr
 from dotenv import load_dotenv
 
@@ -71,7 +72,11 @@ def format_context(context):
     for i, doc in enumerate(context, start=1):
         source = doc.metadata.get("source", "unknown")
         score = doc.metadata.get("relevance_score")
-        score_html = f'<span class="score-tag">score {score:.2f}</span>' if score is not None else ""
+        score_html = (
+            f'<span class="score-tag">score {score:.2f}</span>'
+            if score is not None
+            else ""
+        )
         blocks.append(
             f'<div class="source-label">Chunk {i} &middot; {source}{score_html}</div>\n\n'
             f"{doc.page_content}\n\n---\n"
@@ -91,10 +96,16 @@ def main():
     def put_message_in_chatbot(message, history):
         return "", history + [{"role": "user", "content": message}]
 
-    with gr.Blocks(title="Insurellm Assistant", theme=THEME, css=CUSTOM_CSS) as ui:
+    with gr.Blocks(
+        title="Insurellm Assistant",
+        theme=THEME,
+        css=CUSTOM_CSS
+    ) as ui:
         with gr.Column(elem_id="header"):
             gr.Markdown("# Insurellm Assistant")
-            gr.Markdown("Retrieval-augmented Q&A over the Insurellm knowledge base.")
+            gr.Markdown(
+                "Retrieval-augmented Q&A over the Insurellm knowledge base."
+            )
 
         with gr.Row():
             with gr.Column(scale=1):
@@ -119,10 +130,19 @@ def main():
                 )
 
         message.submit(
-            put_message_in_chatbot, inputs=[message, chatbot], outputs=[message, chatbot]
-        ).then(chat, inputs=chatbot, outputs=[chatbot, context_markdown])
+            put_message_in_chatbot,
+            inputs=[message, chatbot],
+            outputs=[message, chatbot],
+        ).then(
+            chat,
+            inputs=chatbot,
+            outputs=[chatbot, context_markdown],
+        )
 
-    ui.launch(inbrowser=True)
+    ui.launch(
+        server_name="0.0.0.0",
+        server_port=int(os.environ.get("PORT", 10000)),
+    )
 
 
 if __name__ == "__main__":
