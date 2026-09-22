@@ -56,8 +56,7 @@ def _ensure_vector_db():
 
     if needs_build:
         print("[answer] vector store missing or empty — building from knowledge-base...", flush=True)
-        from ingest import fetch_documents, create_chunks, create_embeddings
-
+        from implementation.ingest import fetch_documents, create_chunks, create_embeddings
         documents = fetch_documents()
         chunks = create_chunks(documents)
         create_embeddings(chunks)
